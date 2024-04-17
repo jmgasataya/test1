@@ -1,17 +1,24 @@
 version: '3.8'
 
 services:
-  backend:
-    build: .
-    ports:
-      - 8090:8080
-    environment:
-      - POSTGRES_DB=example
+  # backend:
+  #   build: .
+  #   ports:
+  #     - 8090:8080
+  #   environment:
+  #     - POSTGRES_DB=example
   jenkins:
     image: jenkins/jenkins
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.jenkins
+    # privileged: true
+    # user: root
     ports: 
       - 8080:8080
     volumes:
       - jenkins_volume:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - /usr/local/bin/docker:/usr/bin/docker
 volumes:
   jenkins_volume:
