@@ -1,0 +1,23 @@
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        // Commands to build your project (e.g., compiling code)
+        sh 'echo Build'
+      }
+    }
+    stage('Test') {
+      steps {
+        // Commands to run tests
+        sh 'echo Test'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        // Commands to deploy your project (e.g., copying artifacts to a server)
+        sh 'echo Deploy'
+      }
+    }
+  }
+}
