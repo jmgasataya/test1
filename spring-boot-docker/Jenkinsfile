@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         // Commands to build your project (e.g., compiling code)
-        sh 'echo Build'
+        sh 'docker build -t spring-boot-app -f spring-boot-docker/Dockerfile .'
       }
     }
     stage('Test') {
