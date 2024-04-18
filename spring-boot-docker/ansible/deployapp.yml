@@ -4,6 +4,9 @@
   tasks: 
     - name: pull container and run
       shell: |
-        docker pull jigsthegreat/test1
-        docker rm -f test-app
-        docker run -it -d --restart always --name test-app -p 8080:8099 jigsthegreat/test1
+        # docker pull jigsthegreat/test1
+        # docker rm -f test-app
+        # docker run -it -d --restart always --name test-app -p 8080:8099 jigsthegreat/test1
+        cd /home/ubuntu/caddy
+        docker compose down
+        docker compose up
