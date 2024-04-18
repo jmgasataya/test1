@@ -43,7 +43,11 @@ jobs:
   deploy-app:
     runs-on: ubuntu-latest
     steps:
-      - name: Run playbook
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
