@@ -1,0 +1,9 @@
+- name: Deploy app
+  hosts: aws
+
+  tasks: 
+    - name: pull container and run
+      shell: |
+        docker pull jigsthegreat/test1
+        docker rm -f test-app
+        docker run -it --restart always --name test-app -p 8080:8080 jigsthegreat/test1
