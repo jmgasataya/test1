@@ -2,10 +2,6 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   docker-build-push:
     runs-on: ubuntu-latest
@@ -45,7 +41,9 @@ jobs:
           file: spring-boot-docker/Dockerfile
           push: true
           tags: jigsthegreat/test1:latest
+
   deploy-app:
+    needs: docker-build-push
     runs-on: ubuntu-latest
     steps:
       -
