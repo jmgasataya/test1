@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  docker-build:
+  docker-build-push:
     runs-on: ubuntu-latest
     # steps:
     #   - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -40,7 +40,9 @@ jobs:
           file: spring-boot-docker/Dockerfile
           push: true
           tags: jigsthegreat/test1:latest
-
+  deploy-app:
+    runs-on: ubuntu-latest
+    steps:
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
@@ -48,28 +50,9 @@ jobs:
           playbook: deployapp.yml
           # Optional, directory where playbooks live
           directory: ./spring-boot-docker/ansible
-          # Optional, ansible configuration file content (ansible.cfg)
-          # configuration: |
-          #   [defaults]
-          #   callbacks_enabled = ansible.posix.profile_tasks, ansible.posix.timer
-          #   stdout_callback = yaml
-          #   nocows = false
           # Optional, SSH private key
           key: ${{secrets.SSH_PRIVATE_KEY}}
           # Optional, literal inventory file contents
           inventory: |
             [aws]
             13.229.86.127 ansible_user=ubuntu
-          # # Optional, SSH known hosts file content
-          # known_hosts: |
-          #   example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
-          # # Optional, encrypted vault password
-          # vault_password: ${{secrets.VAULT_PASSWORD}}
-          # # Optional, galaxy requirements filepath
-          # requirements: galaxy-requirements.yml
-          # # Optional, additional flags to pass to ansible-playbook
-          # options: |
-          #   --inventory .hosts
-          #   --limit group1
-          #   --extra-vars hello=there
-          #   --verbose
