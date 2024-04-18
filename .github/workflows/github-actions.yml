@@ -36,7 +36,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./spring-boot-docker
           file: spring-boot-docker/Dockerfile
           push: true
           tags: jigsthegreat/test1:latest
