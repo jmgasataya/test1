@@ -25,3 +25,41 @@ volumes:
 
 
 #docker run -p 8080:8080 -p 50000:50000 -v jenkins_volume:/var/jenkins_home -v $(which docker):/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:latest
+
+
+
+# version: "3.9"
+
+# services:
+#     jenkins:
+#       build:
+#         context: .
+#         dockerfile: jenkins.Dockerfile
+#       container_name: jenkins
+#       ports:
+#           - '8080:8080'
+#           - '50000:50000'
+#             #image: cicd/jenkins
+#       volumes:
+#       - "jenkins_home:/var/jenkins_home"
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+
+# volumes:
+#   jenkins_home:
+
+# =========
+# =========
+# =========
+
+# FROM jenkins
+
+# USER root
+# RUN apt-get -qq update \
+#    && apt-get -qq -y install \
+#    curl
+
+# RUN curl -sSL https://get.docker.com/ | sh
+
+# RUN usermod -a -G staff jenkins
+
+# USER jenkins
