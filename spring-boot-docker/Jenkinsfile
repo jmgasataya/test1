@@ -11,7 +11,7 @@ pipeline {
     stage('Test') {
       steps {
         // Commands to run tests
-        sh 'echo Test'
+        sh 'docker run -it -d --restart always --name test-app -p 8099:8099 spring-boot-app'
       }
     }
     stage('Deploy') {
