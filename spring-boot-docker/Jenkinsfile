@@ -1,37 +1,37 @@
-// pipeline {
-//   agent any
-//   stages {
-//     stage('Build') {
-//       steps {
-//         // Commands to build your project (e.g., compiling code)
-//         // sh 'docker build -t spring-boot-app -f spring-boot-docker/Dockerfile ./spring-boot-docker'
-//         // sh ''
-//       }
-//     }
-//     stage('Test') {
-//       steps {
-//         // Commands to run tests
-//         sh 'echo Test'
-//       }
-//     }
-//     stage('Deploy') {
-//       steps {
-//         // Commands to deploy your project (e.g., copying artifacts to a server)
-//         sh 'echo Deploy'
-//       }
-//     }
-//   }
-// }
-
 pipeline {
-  agent {
-    docker {
-      image 'docker'
-      args '-v /var/run/docker.sock:/var/run/docker.sock'
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        // Commands to build your project (e.g., compiling code)
+        // sh 'docker build -t spring-boot-app -f spring-boot-docker/Dockerfile ./spring-boot-docker'
+        sh 'docker run hello-world'
+      }
+    }
+    stage('Test') {
+      steps {
+        // Commands to run tests
+        sh 'echo Test'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        // Commands to deploy your project (e.g., copying artifacts to a server)
+        sh 'echo Deploy'
+      }
     }
   }
-
-  stages {
-    sh 'docker run hello-world'
-  }
 }
+
+// pipeline {
+//   agent {
+//     docker {
+//       image 'docker'
+//       args '-v /var/run/docker.sock:/var/run/docker.sock'
+//     }
+//   }
+
+//   stages {
+//     sh 'docker run hello-world'
+//   }
+// }
