@@ -1,0 +1,10 @@
+---
+- name: aws deploy app
+  hosts: aws
+
+  tasks:
+    - name: deploy
+      shell: |
+        docker rm -f node-app
+        docker pull jigsthegreat/test1
+        docker run -it -d --name node-app -p 3000:3000 jigsthegreat/test1
