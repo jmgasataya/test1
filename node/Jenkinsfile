@@ -19,13 +19,7 @@ pipeline {
 
     stage('deploy') {
       steps {
-        // ansiblePlaybook(credentialsId: 'aws_private_key', inventory: 'node/ansible/inventory', playbook: 'node/ansible/awsdeploy.yml')
-        // sh 'ansible-playbook -i node/ansible/inventory node/ansible/awsdeploy.yml'
         withCredentials([file(credentialsId: 'aws_private_key', variable: 'aws_private_key')]) {
-          // do something with the file, for instance 
-          // sh 'echo $aws_private_key > private_key.pem'
-          // sh 'cat private_key.pem'
-          // sh 'chmod 400 private_key.pem'
           sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i node/ansible/inventory node/ansible/awsdeploy.yml --private-key $aws_private_key'
         }
       }
@@ -40,7 +34,7 @@ pipeline {
 }
 
 // pipeline {
-//     agent { docker { image 'node:20.11.1-alpine3.19' } }
+//     agent { docker { image 'node:20-alpine' } }
 //     stages {
 //         stage('build') {
 //             steps {

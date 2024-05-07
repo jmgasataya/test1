@@ -1,0 +1,56 @@
+// pipeline {
+//   agent any
+
+//   stages {
+//     stage('docker-build') {
+//       steps {
+//         sh 'cd node && docker build -t jigsthegreat/test1 .'
+//       }
+//     }
+
+//     stage('docker-push') {
+//       steps {
+//         withCredentials([string(credentialsId: 'DOCKERHUB_PW', variable: 'DOCKERHUB_PW')]) {
+//           sh 'docker login -u jigsthegreat -p ${DOCKERHUB_PW} && \
+//               docker push jigsthegreat/test1:latest'
+//         }
+//       }
+//     }
+
+//     stage('deploy') {
+//       steps {
+//         withCredentials([file(credentialsId: 'aws_private_key', variable: 'aws_private_key')]) {
+//           sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i node/ansible/inventory node/ansible/awsdeploy.yml --private-key $aws_private_key'
+//         }
+//       }
+//     }
+
+//     stage('cleanup') {
+//       steps {
+//         sh 'docker rmi -f jigsthegreat/test1 && docker logout'
+//       }
+//     }
+//   }
+// }
+
+pipeline {
+  agent none
+  stages {
+    stage('Back-end') {
+      agent {
+        docker { image 'maven:3.8.1-adoptopenjdk-11' }
+      }
+      steps {
+        sh 'mvn --version'
+      }
+    }
+    stage('Front-end') {
+      agent {
+        docker { image 'node:20-alpine' }
+      }
+      steps {
+        sh 'node --version'
+      }
+    }
+  }
+}
